@@ -1,5 +1,3 @@
-package kartu;
-
 public abstract class Kartu {
     //warna
     public static final int HIJAU = 15 ;
@@ -32,6 +30,7 @@ public abstract class Kartu {
     public Kartu(int color, int value){
         this.color = color;
         this.value = value;
+        int cek = SATU;
     }
 
 
