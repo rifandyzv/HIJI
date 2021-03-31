@@ -11,16 +11,16 @@ public class Deck{
     public void createNumberCards(){
         for(int i = 0; i < 2; i++){
             for(int j = 0; j < 10; j++){
-                cardListDeck.add(new angkaKartu(Warna.BIRU, j));
+                cardListDeck.add(new AngkaKartu(Warna.BIRU, j));
             }
             for(int j = 0; j < 10; j++){
-                cardListDeck.add(new angkaKartu(Warna.HIJAU, j));
+                cardListDeck.add(new AngkaKartu(Warna.HIJAU, j));
             }
             for(int j = 0; j < 10; j++){
-                cardListDeck.add(new angkaKartu(Warna.MERAH, j));
+                cardListDeck.add(new AngkaKartu(Warna.MERAH, j));
             }
             for(int j = 0; j < 10; j++){
-                cardListDeck.add(new angkaKartu(Warna.KUNING, j));
+                cardListDeck.add(new AngkaKartu(Warna.KUNING, j));
             }
         }
     }
@@ -56,7 +56,7 @@ public class Deck{
     }
 
     public Card getRandomCard(){
-        int randomCard = rand.nextInt(cardListDeck.size());
+        int randomCard = rand.nextInt(cardListDeck.size() - 1);
         return cardListDeck.get(randomCard);
     }
 }

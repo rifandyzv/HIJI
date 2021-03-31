@@ -5,4 +5,12 @@ public class Skip extends Card {
     public Skip(int color){
         super(color);
     }
+
+    public String getAngka(){
+        return "SKIP";
+    }
+    public String getType(){
+        return "SKIP";
+    }
+
 }

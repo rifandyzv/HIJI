@@ -25,11 +25,11 @@ public class Deck2 {
     }
 
     public void createNumberCards(int color){
-        Card nol = new angkaKartu(color, 0);
+        Card nol = new AngkaKartu(color, 0);
         addCard(nol);
         for (int i = 0; i < 2; i++) {
             for (int value = 1; value < 10; value++){
-                Card tempCard = new angkaKartu(color, value);
+                Card tempCard = new AngkaKartu(color, value);
                 addCard(tempCard);
             }
         }

@@ -4,4 +4,12 @@ public class DrawTwo extends Card{
     public DrawTwo(int c){
         super(c);
     }
+
+    public String getAngka(){
+        return "PLUS 2";
+    }
+    public String getType(){
+        return "PLUS 2";
+    }
+
 }

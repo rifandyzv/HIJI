@@ -30,8 +30,15 @@ public abstract class Card {
 		}
 		return "Color";
 	}
-	public abstract String getAngka();
+	
 	public String toString() {
-		return getColorString() + " Card";
+		if (getColorString() == "Wild"){
+			return (getAngka());
+		}
+		return (getAngka() + " " + getColorString());
 	}
+
+	//abstract method
+	public abstract String getAngka();
+	public abstract String getType();
 }

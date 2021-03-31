@@ -4,7 +4,6 @@ public class Player {
     public String name;
     static int playerNum = 0;
     // public boolean turn; kalo ada array buat urutan main ini gaperlu kayanya
-    private int jumlahKartu;
     private ArrayList<Card> listKartu;
 
 
@@ -25,23 +24,36 @@ public class Player {
         return playerNum;
     }
     public int getJmlKartu(){
-        return jumlahKartu;
+        return listKartu.size();
+    }
+
+    public void addPlayerCard(Card c){
+        listKartu.add(c);
     }
 
     public void HIJI() {
-        if (jumlahKartu == 1) {
+        if (getJmlKartu() == 1) {
             System.out.println("HIIJII!!");
         }
     }
 
     public void showCards() {
+        System.out.println("Kartu milik : " + name);
         for (int i = 0; i < listKartu.size(); i++){
-            if(listKartu.get(i).type == Type.PLUS_2){
-
-            }
+            System.out.println((i+1) + ". " + listKartu.get(i).toString());
         }
     }
 
+    public void drawCard(Deck d){
+        addPlayerCard(d.getRandomCard());
+    }
 
+    public void discard(int index){
+        listKartu.remove(index-1);
+    }
+
+    public Card getCard(int index){
+        return listKartu.get(index);
+    }
 
 }

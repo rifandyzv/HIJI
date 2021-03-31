@@ -3,4 +3,11 @@ public class Reverse extends Card{
     public Reverse(int c){
         super(c);
     }
+    public String getAngka(){
+        return "REVERSE";
+    }
+    public String getType(){
+        return "REVERSE";
+    }
+
 }
