@@ -2,10 +2,12 @@ import java.util.*;
 
 public class Deck{
     List<Card> cardListDeck = new ArrayList<>();
+    List<Card> cardStartDeck = new ArrayList<>();
     Random rand = new Random();
 
     public Deck(){
         createDeck();
+        createStartingDeck();
     }
 
     public void createNumberCards(){
@@ -55,8 +57,27 @@ public class Deck{
         createWildCards();
     }
 
+    public void createStartingDeck(){
+        for(int j = 0; j < 10; j++){
+            cardStartDeck.add(new AngkaKartu(Warna.BIRU, j));
+        }
+        for(int j = 0; j < 10; j++){
+            cardStartDeck.add(new AngkaKartu(Warna.HIJAU, j));
+        }
+        for(int j = 0; j < 10; j++){
+            cardStartDeck.add(new AngkaKartu(Warna.MERAH, j));
+        }
+        for(int j = 0; j < 10; j++){
+            cardStartDeck.add(new AngkaKartu(Warna.KUNING, j));
+        }
+    }
     public Card getRandomCard(){
         int randomCard = rand.nextInt(cardListDeck.size() - 1);
         return cardListDeck.get(randomCard);
+    }
+
+    public Card getStartCard(){
+        int randomCard = rand.nextInt(cardStartDeck.size() - 1);
+        return cardStartDeck.get(randomCard);
     }
 }

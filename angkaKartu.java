@@ -13,4 +13,9 @@ public class AngkaKartu extends Card {
     public String getType(){
         return "Number Card";
     }
+
+    public void setAngka(int n) {
+        angka = n;
+    }
+
 }

@@ -49,11 +49,15 @@ public class Player {
     }
 
     public void discard(int index){
-        listKartu.remove(index-1);
+        listKartu.remove(index-1);   
     }
 
     public Card getCard(int index){
         return listKartu.get(index);
+    }
+
+    public int cardsInHand(){
+        return listKartu.size();
     }
 
 }

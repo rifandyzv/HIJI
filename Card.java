@@ -11,9 +11,17 @@ public abstract class Card {
 		return color;
 	}
 
+	public void setColor(int c) {
+		color = c;
+	}
+
 	public boolean equalsColor(Card c) {
 		return color == c.getColor();
 	}
+	public boolean equals(Card c){
+		return ((this.equalsColor(c)) || (this.getAngka().equals(c.getAngka())));
+	}
+
     
 	public String getColorString() {
 		switch (color) {
@@ -37,6 +45,8 @@ public abstract class Card {
 		}
 		return (getAngka() + " " + getColorString());
 	}
+
+	
 
 	//abstract method
 	public abstract String getAngka();
