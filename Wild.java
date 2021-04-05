@@ -4,6 +4,9 @@ public class Wild extends Card{
     public Wild(){
         super(Warna.BLACK);
     }
+    public Wild(int c){
+        super(c);
+    }
 
     //method
     public String getAngka(){

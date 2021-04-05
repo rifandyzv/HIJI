@@ -45,11 +45,13 @@ public class Player {
     }
 
     public void drawCard(Deck d){
-        addPlayerCard(d.getRandomCard());
+        Card randomCard = d.getRandomCard();
+        addPlayerCard(randomCard);
+        System.out.println("Kartu yang anda dapatkan adalah: " + randomCard.toString());
     }
 
     public void discard(int index){
-        listKartu.remove(index-1);   
+        listKartu.remove(index-1);
     }
 
     public Card getCard(int index){
@@ -59,5 +61,4 @@ public class Player {
     public int cardsInHand(){
         return listKartu.size();
     }
-
 }

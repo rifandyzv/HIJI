@@ -14,8 +14,5 @@ public class AngkaKartu extends Card {
         return "Number Card";
     }
 
-    public void setAngka(int n) {
-        angka = n;
-    }
 
 }

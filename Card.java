@@ -1,7 +1,7 @@
 public abstract class Card {
 
 
-    int color;
+    private int color;
 
 	public Card(int c) {
 		color = c;
@@ -11,18 +11,26 @@ public abstract class Card {
 		return color;
 	}
 
-	public void setColor(int c) {
+	public void setColor(int c){
 		color = c;
 	}
 
 	public boolean equalsColor(Card c) {
 		return color == c.getColor();
 	}
-	public boolean equals(Card c){
-		return ((this.equalsColor(c)) || (this.getAngka().equals(c.getAngka())));
+
+	public boolean equals(Card c) {
+        return (this.equalsColor(c) || (this.getAngka().equals(c.getAngka())));
+    }
+
+	public boolean equalsAngka(Card c) {
+		return (this.getAngka().equals(c.getAngka()));
 	}
 
-    
+	public boolean equalsStrict(Card c){
+		return (this.equalsColor(c) && (this.getAngka().equals(c.getAngka())));
+	}
+
 	public String getColorString() {
 		switch (color) {
 		case Warna.HIJAU:
@@ -45,8 +53,6 @@ public abstract class Card {
 		}
 		return (getAngka() + " " + getColorString());
 	}
-
-	
 
 	//abstract method
 	public abstract String getAngka();

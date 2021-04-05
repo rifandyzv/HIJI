@@ -11,5 +11,7 @@ public class DrawTwo extends Card{
     public String getType(){
         return "PLUS 2";
     }
-
+    public int getTakeCard(){
+        return takecard;
+    }
 }
