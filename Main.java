@@ -54,6 +54,7 @@ public class Main {
         Card currentCard;
         boolean gameOn = true;
         boolean gameFinished = false;
+        int drawAccumulation = 0;
         int winnerIndex = -1;
         int currentPlayer = 0;
         // print menu
@@ -70,7 +71,7 @@ public class Main {
             System.out.println("2. Exit");
             System.out.println("Masukkan perintah: ");
             int perintah = in.nextInt();
-    
+            boolean onDraw = false;
             if (perintah == 1){
                 
                 System.out.println("");
@@ -91,6 +92,68 @@ public class Main {
                 while(gameOn){
                     int skipTimes = 0;
                     int drawTwoStatus = 0;
+                    if (currentCard instanceof DrawFour || currentCard instanceof DrawTwo) {
+                        onDraw = true;
+                    }
+                    while (onDraw) {                        
+                        System.out.println("Hai " + listPlayer.get(currentPlayer).name + ", siap siap ambil " + drawAccumulation + " kartu !");
+                        System.out.println("");
+                        System.out.println("1. Draw " + drawAccumulation + " kartu");
+                        System.out.println("2. DISCARD !");
+                        int draw = in.nextInt();
+                        if (draw == 1) {
+                            for (int i = 0; i < drawAccumulation; i++) {
+                                listPlayer.get(currentPlayer).drawCard(deck);
+                            }
+                            drawAccumulation = 0;
+                            currentPlayer = main.getNextPlayerIndex(currentPlayer);
+                            onDraw = false;
+                        }
+                        else if (draw == 2) {
+                            listPlayer.get(currentPlayer).showCards(); 
+                            System.out.println("Masukkan nomor kartu yang ingin dimainkan: ");
+                            int discardIndex = in.nextInt();
+                            Card tempCard = listPlayer.get(currentPlayer).getCard(discardIndex-1);
+
+                            if (tempCard instanceof DrawFour) {
+                                drawAccumulation += 4;
+                                System.out.println("");
+                                System.out.println("Pilih warna :");
+                                System.out.println("1. Hijau");
+                                System.out.println("2. Kuning");
+                                System.out.println("3. Merah");
+                                System.out.println("4. Biru");
+                                int wild = in.nextInt();
+                                if (wild == Warna.MERAH) {
+                                    tempCard = new DrawFour(Warna.MERAH);
+                                }
+                                else if (wild == Warna.BIRU) {
+                                    tempCard = new DrawFour(Warna.BIRU);
+                                }
+                                else if (wild == Warna.KUNING) {
+                                    tempCard = new DrawFour(Warna.KUNING);
+                                }
+                                else if (wild == Warna.HIJAU) {
+                                    tempCard = new DrawFour(Warna.HIJAU);
+                                }
+                            }
+                            else if (tempCard instanceof DrawTwo && tempCard.equals(currentCard)) {
+                                drawAccumulation += 2;
+                            }
+                            else {
+                                System.out.println("Kartu bukan kartu DRAW !");
+                                System.out.println("Ambil " + drawAccumulation + " kartu !!!");
+                                onDraw = false;
+                                
+                            }
+                            
+                            currentPlayer = main.getNextPlayerIndex(currentPlayer);
+                            currentCard = tempCard;
+
+                        }
+                            
+                        
+                    }
                     System.out.println("");
                     System.out.println("Giliran : " + listPlayer.get(currentPlayer).name);
                     System.out.println("Kartu saat ini: " + currentCard.toString());
@@ -107,6 +170,8 @@ public class Main {
                     System.out.println("7. Help");
                     System.out.println("");
                     System.out.println("0. Exit");
+                    
+
                     int gameCommand = in.nextInt();
                     if (gameCommand == 0){
                         exit = true;
@@ -147,9 +212,11 @@ public class Main {
                     else if (gameCommand == 5){
                         listPlayer.get(currentPlayer).showCards(); 
                         System.out.println("Masukkan nomor kartu yang ingin dimainkan: ");
-                        int discardIndex = in.nextInt();
+                        int discardIndex = in.nextInt();                      
                         Card tempCard = listPlayer.get(currentPlayer).getCard(discardIndex-1);
                         int nextPlayer = main.getNextPlayerIndex(currentPlayer);
+
+                        
                         if(tempCard.equals(currentCard)){
                             int repetition = 1;
                             boolean multiCardCheck = false;
@@ -161,7 +228,7 @@ public class Main {
                                 }
                             }
                             if(multiCardCheck){
-                                System.out.println("Apakah anda ingin melakukan Multiple Discard? (Mainkan lebih dari satu kartu yang sama PERSIS");
+                                System.out.println("Apakah anda ingin melakukan Multiple Discard? (Mainkan lebih dari satu kartu yang sama PERSIS)");
                                 System.out.println("1. Ya");
                                 System.out.println("2. Tidak");
                                 int multiDiscard = in.nextInt();
@@ -201,9 +268,8 @@ public class Main {
                             for(int i = 0; i < repetition; i++){
                                 if(tempCard instanceof DrawTwo || tempCard instanceof Skip || tempCard instanceof Reverse){
                                     if (tempCard instanceof DrawTwo){
-                                        System.out.println("Hai " + listPlayer.get(main.getNextPlayerIndex(currentPlayer)).name + ", kamu dapat kado dua kartu!");
-                                        listPlayer.get(nextPlayer).drawCard(deck);
-                                        listPlayer.get(nextPlayer).drawCard(deck); 
+                                        // System.out.println("Hai " + listPlayer.get(main.getNextPlayerIndex(currentPlayer)).name + ", kamu dapat kado dua kartu!");
+                                        drawAccumulation += 2;
                                         drawTwoStatus = 1;
                                     }
                                     else if (tempCard instanceof Skip){
@@ -252,7 +318,7 @@ public class Main {
                                     gameCommand = in.nextInt();
                                     hijiCheck = hiji.getHijiResult();
                                     if(gameCommand == 6 && (!hijiCheck)){
-                                        System.out.println("HIJIII!");
+                                        System.out.println(listPlayer.get(currentPlayer).name + " : 'HIJIII!'");
                                         System.out.println("Hati-hati para pemain, " + listPlayer.get(currentPlayer).name + " hanya punya satu kartu lagi!");
                                         hiji.interrupt();
                                         hijiCheck = true;
@@ -336,7 +402,7 @@ public class Main {
                                 }
                             } 
                             else if (tempCard instanceof DrawFour){
-                                System.out.println("Halo " + listPlayer.get(main.getNextPlayerIndex(currentPlayer)).name + ", siap-siap ambil " + (repetition*4) + " kartu!");
+                                // System.out.println("Halo " + listPlayer.get(main.getNextPlayerIndex(currentPlayer)).name + ", siap-siap ambil " + (repetition*4) + " kartu!");
                                 System.out.println("");
                                 System.out.println("Pilih warna :");
                                 System.out.println("1. Hijau");
@@ -357,10 +423,7 @@ public class Main {
                                     tempCard = new DrawFour(Warna.HIJAU);
                                 }
                                 for(int j = 0; j < repetition; j++){
-                                    listPlayer.get(nextPlayer).drawCard(deck);
-                                    listPlayer.get(nextPlayer).drawCard(deck);
-                                    listPlayer.get(nextPlayer).drawCard(deck);
-                                    listPlayer.get(nextPlayer).drawCard(deck);
+                                    drawAccumulation += 4;
                                 }
                             }
                             currentCard = tempCard;
@@ -404,9 +467,11 @@ public class Main {
                             }
                             currentPlayer = main.getNextPlayerIndex(currentPlayer);
                         }
+                        
                         else{
                             System.out.println("Kartu tidak dapat dimainkan!");
                         }
+                        
                     }
                     else if(gameCommand == 6){
                         if(listPlayer.get(currentPlayer).cardsInHand() != 1){
@@ -419,6 +484,10 @@ public class Main {
                     else if(gameCommand == 7){
                         help.printHelp();
                     }
+
+
+
+                    
                 }
                 if(gameFinished){
                     System.out.println("");
