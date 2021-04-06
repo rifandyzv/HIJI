@@ -1,2 +1,7 @@
 # HIJI
-creating bootleg version of UNO games using Java
+
+How to compile :
+javac Main.java
+
+How to play :
+java Main
