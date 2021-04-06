@@ -34,9 +34,7 @@ public class Main {
 
     public void bagiKartu(Player p){
         for (int i = 0; i < 7; i++){
-            p.addPlayerCard(deck.getRandomCard());
-            p.addPlayerCard(new DrawFour());
-            p.addPlayerCard(new DrawTwo(Warna.BIRU));
+            p.addPlayerCard(deck.getRandomCard());            
         }
     }
     
