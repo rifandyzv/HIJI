@@ -19,6 +19,7 @@ public class HijiChecker extends Thread{
     public void HijiFailed(){
         System.out.println("Kamu lupa melakukan Declare HIJI!");
         System.out.println("Masih kangen main ya? Kamu dapat dua kartu tambahan!");
+        System.out.println("Ketik apapun untuk melanjutkan : ");
         player.drawCard(d);
         player.drawCard(d);
         this.hijiResult = true;

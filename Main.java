@@ -268,7 +268,7 @@ public class Main {
                         System.out.println(""); 
                         System.out.println("Masukkan nomor kartu yang ingin dimainkan: ");
                         int discardIndex = in.nextInt();
-                        if(discardIndex < listPlayer.get(currentPlayer).cardsInHand() && discardIndex > 0){                      
+                        if(discardIndex <= listPlayer.get(currentPlayer).cardsInHand() && discardIndex > 0){                      
                             Card tempCard = listPlayer.get(currentPlayer).getCard(discardIndex-1);
                             int nextPlayer = main.getNextPlayerIndex(currentPlayer);
                             if(tempCard.equals(currentCard)){
